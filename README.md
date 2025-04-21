@@ -50,23 +50,7 @@ There are some useful commands in this article (make changes based on your syste
 | `ip route show` | Verify your default gateway configuration: there is some information like "default via 10.0.2.2". And this can be used later. |
 | `ls /etc/netplan/` | Help to identify the netplan configuration file. You may find it similar as "/etc/netplan/00-installer-config.yaml". |
 | `sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.copy` | It's a good idea to create a copy before making the change |
-| `sudo vim /etc/netplan/00-installer-config.yaml` | Edit the netplan configuration. Its content can be configured as: 
-
-```yaml
-network:
-  version: 2
-  ethernets:
-    enp0s3:
-      addresses:
-        - 10.0.2.101/24
-      gateway4: 10.0.2.2
-      nameservers:
-        addresses:
-          - 10.0.2.2
-```
-|
-| Commands | Explanations |
-|----------|--------------|
+| `sudo vim /etc/netplan/00-installer-config.yaml` | Edit the netplan configuration. Its content can be configured as [the included yaml file](netplan-config.yaml). |
 | `sudo netplan apply` | Apply the configured netplan. |
 | `ip a` | Verify the IP is changed |
 | `ping google.com` | Verify the outgoing network traffic |
