@@ -14,6 +14,8 @@ Then create a VM by [following the instruction here](https://www.virtualbox.org/
 
 Select the Ubuntu Server ISO image you just downloaded. VirtualBox can detect the Linux distribution of the guest image of Ubuntu Server 22.04 during this installation.
 
+**Please note**: select "skip unattended installation". The current version of VirtualBox is 7.1.6, which is not equipted with a sophisticated feature of unattended installation for Ubuntu 22.04 server.
+
 During the installation of Ubuntu Server, you will see interfaces for your language, keyboard layout, network connection, proxy address, mirror address, disk configuration, etc. You can just select "Done" by using keyboard "Tab", "Up", "Down" and "Enter". Then "Continue" in the dialog prompt to finish the disk configuration.
 
 After that, type in your basic account info, e.g., server's name, username and password. Then select "Install OpenSSH Server", and leave other software unselected, and "Done".
@@ -50,10 +52,11 @@ There are some useful commands in this article (make changes based on your syste
 | `ip route show` | Verify your default gateway configuration: there is some information like "default via 10.0.2.2". And this can be used later. |
 | `ls /etc/netplan/` | Help to identify the netplan configuration file. You may find it similar as "/etc/netplan/00-installer-config.yaml". |
 | `sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.copy` | It's a good idea to create a copy before making the change |
-| `sudo vim /etc/netplan/00-installer-config.yaml` | Edit the netplan configuration. Its content can be configured as [the included yaml file](netplan-config.yaml). |
+| `sudo vim /etc/netplan/00-installer-config.yaml` | Edit the netplan configuration. Its content can be configured as [the included yaml file](00-installer-config.yaml). |
 | `sudo netplan apply` | Apply the configured netplan. |
 | `ip a` | Verify the IP is changed |
 | `ping google.com` | Verify the outgoing network traffic |
+| `sudo vim /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` | Add this: `network: {config: disabled}` This is used to disable cloud-init networking, which can reset the networking config (e.g., back to hdcp) on reboot based on a datasource. |
 
 Please make necessary changes based on your specific case. This means some of the commands above need to be modified accordingly.
 
@@ -64,7 +67,7 @@ Once the first VM is created, we can clone it for future VMs. We can follow [the
 
 You can select "Generate New MAC Addresses For All Network Adapters" in the MAC Address Policy, and "Full clone" in Clone type.
 
-Once this is done, please change the hostname and static IP, by similar manner as **Step 1** above.
+Once this is done, please **change the hostname and static IP**, by similar manner as **Step 1** above.
 
 ### 3. Channel the network connection between VMs.
 
@@ -101,3 +104,7 @@ This is a similar rule for VM2. You can change the name or IP as needed.
 
 Then we can open two instances of PuTTY to connect to our VMs:
 ![diagram](putty.png)
+
+### 5. Disable DHCP in VirtualBox
+
+You can go to VirtualBox Manager, and find File -> Tools -> Network Manager: then under NAT Networks tab, General Options, uncheck `Enable DHCP`, and apply.
