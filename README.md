@@ -79,8 +79,8 @@ For each VM, go to Settings, select Network. And for your enabled adapter, selec
 
 ### 4. Set Port Forwarding
 
-You can download PuTTY at:
-https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+You can download PuTTY at [here](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
+
 
 The installation is straightforward. You need to remember its installation location, to launch it later.
 
