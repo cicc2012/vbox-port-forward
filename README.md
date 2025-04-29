@@ -50,7 +50,7 @@ There are some useful commands in this article (make changes based on your syste
 | `ip a` | Display available Ethernet interfaces. The one with information like "inet 10.0.***.***" should be our target interface, e.g., enp0s3. |
 | `ip address show dev enp0s3` | Verify the IP configuration: the IP is like 10.0.***.*** and the state is UP. |
 | `ip route show` | Verify your default gateway configuration: there is some information like "default via 10.0.2.2". And this can be used later. |
-| `ls /etc/netplan/` | Help to identify the netplan configuration file. You may find it similar as "/etc/netplan/00-installer-config.yaml". |
+| `ls /etc/netplan/` | Help to identify the netplan configuration file. You may find it similar as "/etc/netplan/00-installer-config.yaml". **In the yaml configuration file, please pay attention to the indentations.**|
 | `sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.copy` | It's a good idea to create a copy before making the change |
 | `sudo vim /etc/netplan/00-installer-config.yaml` | Edit the netplan configuration. Its content can be configured as [the included yaml file](00-installer-config.yaml). |
 | `sudo netplan apply` | Apply the configured netplan. |
