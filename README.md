@@ -50,13 +50,13 @@ There are some useful commands in this article (make changes based on your syste
 | `ip a` | Display available Ethernet interfaces. The one with information like "inet 10.0.***.***" should be our target interface, e.g., enp0s3. |
 | `ip address show dev enp0s3` | Verify the IP configuration: the IP is like 10.0.***.*** and the state is UP. |
 | `ip route show` | Verify your default gateway configuration: there is some information like "default via 10.0.2.2". And this can be used later. |
-| `ls /etc/netplan/` | Help to identify the netplan configuration file. You may find it similar as "/etc/netplan/00-installer-config.yaml". **In the yaml configuration file, please pay attention to the indentations.**|
+| `ls /etc/netplan/` | Help to identify the netplan configuration file. You may find it similar as "/etc/netplan/00-installer-config.yaml". |
 | `sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.copy` | It's a good idea to create a copy before making the change |
-| `sudo vim /etc/netplan/00-installer-config.yaml` | Edit the netplan configuration. Its content can be configured as [the included yaml file](00-installer-config.yaml). |
+| `sudo vim /etc/netplan/00-installer-config.yaml` | Edit the netplan configuration. Its content can be configured as [the included yaml file](00-installer-config.yaml). **In the yaml configuration file, please pay attention to the indentations.** |
 | `sudo netplan apply` | Apply the configured netplan. |
 | `ip a` | Verify the IP is changed |
 | `ping google.com` | Verify the outgoing network traffic |
-| `sudo vim /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` | Add this: `network: {config: disabled}` This is used to disable cloud-init networking, which can reset the networking config (e.g., back to hdcp) on reboot based on a datasource. |
+| `sudo vim /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` | Add this: `network: {config: disabled}` This is used to disable cloud-init networking, which can reset the networking config (e.g., back to DHCP) on reboot based on a datasource. |
 
 Please make necessary changes based on your specific case. This means some of the commands above need to be modified accordingly.
 
