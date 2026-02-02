@@ -11,3 +11,4 @@ network:
       nameservers:
         addresses:
           - 10.0.2.1
+          - 8.8.8.8
